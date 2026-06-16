@@ -1,0 +1,122 @@
+<div class="noticias-container container">
+  <!-- Header Page -->
+  <header class="page-header">
+    <span class="badge float-animation">NOVEDADES</span>
+    <h1>NOTICIAS Y <span class="neon-text-pink">ARTÍCULOS</span></h1>
+    <p class="header-subtitle">Infórmate sobre las últimas tendencias de la industria, hardware y cobertura exclusiva de esports.</p>
+  </header>
+
+  <div class="news-layout">
+    <!-- Left Column: Articles list -->
+    <main class="articles-list">
+      @for (article of articles; track article.id) {
+        <article class="article-card card">
+          <div class="article-image-wrapper">
+            <img [src]="article.image" [alt]="article.title" class="article-img">
+            <span class="article-category-badge" [ngClass]="{
+              'cat-esports': article.category === 'Esports',
+              'cat-tech': article.category === 'Tecnología',
+              'cat-launch': article.category === 'Lanzamientos'
+            }">{{ article.category }}</span>
+          </div>
+          
+          <div class="article-content">
+            <div class="article-meta">
+              <span><i class="fa-regular fa-calendar"></i> {{ article.date }}</span>
+              <span><i class="fa-regular fa-clock"></i> {{ article.readTime }}</span>
+            </div>
+            
+            <h2 class="article-title">{{ article.title }}</h2>
+            <p class="article-summary">{{ article.summary }}</p>
+            
+            <div class="article-footer">
+              <div class="article-stats">
+                <span><i class="fa-regular fa-eye"></i> {{ article.views }} vistas</span>
+                <span><i class="fa-regular fa-comment"></i> {{ article.comments }} comentarios</span>
+              </div>
+              
+              <button class="btn btn-secondary btn-small">
+                Leer Más <i class="fa-solid fa-arrow-right-long"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+      }
+    </main>
+
+    <!-- Right Column: Sidebar -->
+    <aside class="news-sidebar">
+      <!-- Newsletter Card -->
+      <div class="sidebar-widget card newsletter-widget">
+        <h3>SUSCRÍBETE AL BOLETÍN</h3>
+        <p>Recibe resúmenes semanales de las mejores noticias directamente en tu bandeja de entrada.</p>
+        
+        @if (subscribed) {
+          <div class="subscribe-success neon-text-cyan">
+            <i class="fa-solid fa-circle-check"></i>
+            <p>{{ successMessage }}</p>
+          </div>
+        } @else {
+          <form (ngSubmit)="subscribeNewsletter()" class="newsletter-form">
+            <div class="form-group">
+              <label class="form-label" for="newsletterEmail">Correo Electrónico:</label>
+              <input 
+                id="newsletterEmail"
+                type="email" 
+                class="form-control" 
+                placeholder="ejemplo@correo.com" 
+                [(ngModel)]="email" 
+                name="email"
+                required
+              >
+            </div>
+            <button type="submit" class="btn btn-primary btn-full-width">
+              <i class="fa-solid fa-bell"></i> Suscribirme
+            </button>
+          </form>
+        }
+      </div>
+
+      <!-- Categories Widget -->
+      <div class="sidebar-widget card">
+        <h3>CATEGORÍAS</h3>
+        <ul class="categories-list">
+          <li>
+            <a href="javascript:void(0)" class="category-link">
+              <span><i class="fa-solid fa-chevron-right"></i> Esports</span>
+              <span class="category-count">12</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="category-link">
+              <span><i class="fa-solid fa-chevron-right"></i> Hardware & Tech</span>
+              <span class="category-count">8</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="category-link">
+              <span><i class="fa-solid fa-chevron-right"></i> Próximos Lanzamientos</span>
+              <span class="category-count">15</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="category-link">
+              <span><i class="fa-solid fa-chevron-right"></i> Análisis & Reviews</span>
+              <span class="category-count">24</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Discord/Social Widget -->
+      <div class="sidebar-widget card discord-widget">
+        <div class="discord-icon"><i class="fa-brands fa-discord"></i></div>
+        <h3>ÚNETE AL SERVIDOR</h3>
+        <p>¿Buscas con quién jugar? Únete a nuestro Discord oficial de PixelVerse.</p>
+        <a href="https://discord.com" target="_blank" rel="noopener" class="btn btn-pink btn-full-width">
+          Entrar a la Comunidad
+        </a>
+      </div>
+    </aside>
+  </div>
+</div>

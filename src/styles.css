@@ -1,0 +1,247 @@
+/* Design System: PixelVerse Gaming Portal */
+
+:root {
+  --bg-primary: #0a0b0e;
+  --bg-secondary: #12141c;
+  --bg-tertiary: #1b1e2a;
+  
+  --accent-purple: #8a2be2;
+  --accent-cyan: #00f5d4;
+  --accent-pink: #ff007f;
+  
+  --glow-purple: 0 0 15px rgba(138, 43, 226, 0.5);
+  --glow-cyan: 0 0 15px rgba(0, 245, 212, 0.5);
+  --glow-pink: 0 0 15px rgba(255, 0, 127, 0.5);
+  
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-white: #ffffff;
+  
+  --font-gaming: 'Orbitron', 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius: 12px;
+}
+
+/* Base resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+body.dark-theme {
+  background-color: var(--bg-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-gaming);
+  color: var(--text-white);
+  letter-spacing: 1px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-purple);
+  box-shadow: var(--glow-purple);
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Glowing text & links */
+.neon-text-purple {
+  color: var(--accent-purple);
+  text-shadow: 0 0 8px rgba(138, 43, 226, 0.4);
+}
+
+.neon-text-cyan {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 8px rgba(0, 245, 212, 0.4);
+}
+
+.neon-text-pink {
+  color: var(--accent-pink);
+  text-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-family: var(--font-gaming);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border: none;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-purple), #5e17eb);
+  color: var(--text-white);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-purple);
+  background: linear-gradient(135deg, #9b4dff, var(--accent-purple));
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent-cyan);
+  border: 2px solid var(--accent-cyan);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 245, 212, 0.1);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-2px);
+}
+
+.btn-pink {
+  background: linear-gradient(135deg, var(--accent-pink), #c20058);
+  color: var(--text-white);
+  box-shadow: 0 4px 15px rgba(255, 0, 127, 0.3);
+}
+
+.btn-pink:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-pink);
+  background: linear-gradient(135deg, #ff3399, var(--accent-pink));
+}
+
+/* Cards (Glassmorphism + Hover glow) */
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--transition-smooth);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(138, 43, 226, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(138, 43, 226, 0.1);
+}
+
+/* Forms styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-gaming);
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 18px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid #2d3142;
+  border-radius: var(--border-radius);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  transition: var(--transition-smooth);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
+  background-color: rgba(27, 30, 42, 0.8);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 245, 212, 0.6);
+  }
+}
+
+.pulse-glow-cyan {
+  animation: pulseGlow 3s infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}

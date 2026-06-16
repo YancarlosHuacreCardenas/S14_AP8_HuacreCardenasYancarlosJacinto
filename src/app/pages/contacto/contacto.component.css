@@ -1,0 +1,318 @@
+.contacto-container {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.header-subtitle {
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Layout */
+.contacto-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+  align-items: start;
+}
+
+.contacto-form-wrapper {
+  position: relative;
+}
+
+/* Success Alert */
+.success-alert {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--accent-cyan);
+  border-radius: var(--border-radius);
+  padding: 40px 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.close-alert-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.close-alert-btn:hover {
+  color: var(--accent-pink);
+}
+
+.success-alert-icon {
+  font-size: 3.5rem;
+  color: var(--accent-cyan);
+  text-shadow: var(--glow-cyan);
+  margin-bottom: 15px;
+}
+
+.success-alert h2 {
+  font-size: 1.8rem;
+  color: var(--text-white);
+  margin-bottom: 15px;
+}
+
+.success-alert p {
+  color: var(--text-muted);
+  margin-bottom: 25px;
+  font-size: 1rem;
+}
+
+/* Form Styling */
+.form-card {
+  padding: 40px;
+  transition: opacity 0.3s ease;
+}
+
+.form-card.dimmed {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.form-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.validation-error {
+  color: var(--accent-pink);
+  font-size: 0.8rem;
+  margin-top: 6px;
+  font-weight: 500;
+  text-shadow: 0 0 5px rgba(255, 0, 127, 0.2);
+}
+
+.form-actions-row {
+  margin-top: 30px;
+}
+
+.form-actions-row button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Sidebar Styling */
+.contacto-info-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.sidebar-title {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.sidebar-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 45px;
+  height: 2px;
+  background-color: var(--accent-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.info-card {
+  padding: 30px;
+}
+
+.info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.info-item-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.info-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(0, 245, 212, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  font-size: 1.3rem;
+  border: 1px solid rgba(0, 245, 212, 0.2);
+  flex-shrink: 0;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-family: var(--font-gaming);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  color: var(--text-white);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Discord Promo Inside Card */
+.discord-promo {
+  border-top: 1px solid var(--bg-tertiary);
+  padding-top: 25px;
+}
+
+.discord-promo h4 {
+  font-size: 0.85rem;
+  font-family: var(--font-gaming);
+  color: var(--text-white);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.discord-promo p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.discord-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #5865F2;
+  color: white;
+  text-decoration: none;
+  font-family: var(--font-gaming);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  transition: var(--transition-smooth);
+}
+
+.discord-btn:hover {
+  background-color: #4752C4;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Social Networks Card */
+.social-networks-card {
+  padding: 30px;
+}
+
+.social-networks-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-family: var(--font-gaming);
+}
+
+.social-circles {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.social-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.social-circle:hover {
+  transform: translateY(-3px);
+  color: var(--text-white);
+}
+
+.social-circle.twitter:hover {
+  border-color: #1DA1F2;
+  background-color: rgba(29, 161, 242, 0.1);
+  box-shadow: 0 0 10px rgba(29, 161, 242, 0.3);
+}
+
+.social-circle.github:hover {
+  border-color: #f0f6fc;
+  background-color: rgba(240, 246, 252, 0.1);
+  box-shadow: 0 0 10px rgba(240, 246, 252, 0.2);
+}
+
+.social-circle.youtube:hover {
+  border-color: #FF0000;
+  background-color: rgba(255, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.social-circle.twitch:hover {
+  border-color: #9146FF;
+  background-color: rgba(145, 70, 255, 0.1);
+  box-shadow: 0 0 10px rgba(145, 70, 255, 0.3);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .contacto-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-card {
+    padding: 24px;
+  }
+  .info-card {
+    padding: 20px;
+  }
+}

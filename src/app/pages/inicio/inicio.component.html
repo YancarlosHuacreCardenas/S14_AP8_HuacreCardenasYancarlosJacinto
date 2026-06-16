@@ -1,0 +1,98 @@
+<div class="inicio-container">
+  <!-- Hero Banner Section -->
+  <section class="hero-banner" style="background-image: linear-gradient(rgba(10, 11, 14, 0.75), rgba(10, 11, 14, 0.95)), url('assets/images/gaming_banner.png');">
+    <div class="hero-content container">
+      <span class="badge float-animation">BIENVENIDO A PIXELVERSE</span>
+      <h1>EL MULTIVERSO DEL <span class="neon-text-cyan">GAMING</span> EN UN SOLO LUGAR</h1>
+      <p class="hero-subtitle">
+        Tu portal definitivo para explorar lanzamientos épicos, enterarte de las últimas noticias del mundo de los videojuegos y conectar con una comunidad apasionada de jugadores de todo el mundo.
+      </p>
+      <div class="hero-actions">
+        <a routerLink="/juegos" class="btn btn-primary">
+          <i class="fa-solid fa-gamepad"></i> Explorar Catálogo
+        </a>
+        <a routerLink="/contacto" class="btn btn-secondary">
+          <i class="fa-solid fa-envelope"></i> Contáctanos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Grid -->
+  <section class="stats-section container">
+    <div class="stats-grid">
+      @for (stat of stats; track stat.label) {
+        <div class="stat-card">
+          <div class="stat-icon-wrapper">
+            <i class="fa-solid" [ngClass]="stat.icon"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-number neon-text-purple">{{ stat.number }}</h3>
+            <p class="stat-label">{{ stat.label }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Featured Spotlight Section -->
+  <section class="spotlight-section container">
+    <div class="section-header">
+      <h2>DESTACADO DE LA <span class="neon-text-pink">SEMANA</span></h2>
+      <p class="section-subtitle">El juego que está revolucionando la industria y del cual todos están hablando.</p>
+    </div>
+    
+    <div class="spotlight-card">
+      <div class="spotlight-image-wrapper">
+        <img [src]="featuredGame.image" [alt]="featuredGame.title" class="spotlight-img">
+        <div class="spotlight-overlay"></div>
+      </div>
+      <div class="spotlight-details">
+        <span class="spotlight-genre"><i class="fa-solid fa-tags"></i> {{ featuredGame.genre }}</span>
+        <h3>{{ featuredGame.title }}</h3>
+        
+        <div class="rating-badge">
+          <i class="fa-solid fa-star"></i>
+          <span>{{ featuredGame.rating }} / 5.0 (Excelente)</span>
+        </div>
+        
+        <p class="spotlight-desc">{{ featuredGame.description }}</p>
+        
+        <div class="spotlight-actions">
+          <a routerLink="/juegos" class="btn btn-pink">
+            <i class="fa-solid fa-circle-info"></i> Ver Detalles
+          </a>
+          <button class="btn btn-secondary btn-icon-only" aria-label="Añadir a lista de deseos">
+            <i class="fa-solid fa-heart"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features-section container">
+    <div class="section-header">
+      <h2>¿QUÉ OFRECE <span class="neon-text-purple">PIXELVERSE</span>?</h2>
+      <p class="section-subtitle">Explora los pilares de nuestra plataforma diseñados exclusivamente para ti.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card card">
+        <div class="feature-icon"><i class="fa-solid fa-fire"></i></div>
+        <h3>Catálogo Curado</h3>
+        <p>Una lista detallada de los mejores títulos actuales, puntuados y clasificados por nuestra comunidad.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="feature-icon"><i class="fa-solid fa-newspaper"></i></div>
+        <h3>Últimas Noticias</h3>
+        <p>Mantente al día con lo que sucede en torneos, lanzamientos de consolas y actualizaciones importantes.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="feature-icon"><i class="fa-solid fa-comments"></i></div>
+        <h3>Comunidad Viva</h3>
+        <p>Interactúa, comparte tus experiencias, reseñas y conecta con otros jugadores apasionados.</p>
+      </div>
+    </div>
+  </section>
+</div>

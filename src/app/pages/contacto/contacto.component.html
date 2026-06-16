@@ -1,0 +1,194 @@
+<div class="contacto-container container">
+  <!-- Header Page -->
+  <header class="page-header">
+    <span class="badge float-animation">SOPORTE Y CONSULTAS</span>
+    <h1>CONTACTA CON <span class="neon-text-cyan">NOSOTROS</span></h1>
+    <p class="header-subtitle">¿Tienes alguna pregunta, sugerencia o problema? Escríbenos y nuestro equipo te responderá en breve.</p>
+  </header>
+
+  <div class="contacto-layout">
+    <!-- Left Column: Form -->
+    <main class="contacto-form-wrapper">
+      @if (submitted) {
+        <div class="success-alert card pulse-glow-cyan">
+          <button class="close-alert-btn" (click)="dismissAlert()" aria-label="Cerrar alerta">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div class="success-alert-icon"><i class="fa-solid fa-circle-check"></i></div>
+          <h2>¡MENSAJE ENVIADO!</h2>
+          <p>Gracias por comunicarte con nosotros, <strong>{{ successName }}</strong>. Hemos recibido tus datos de contacto de forma segura y un agente de soporte se pondrá en contacto contigo en las próximas 24 horas.</p>
+          <button (click)="dismissAlert()" class="btn btn-primary">Entendido</button>
+        </div>
+      }
+
+      <div class="card form-card" [ngClass]="{'dimmed': submitted}">
+        <h2 class="form-title"><i class="fa-solid fa-paper-plane"></i> ENVIAR MENSAJE</h2>
+        
+        <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
+          <!-- Name Field -->
+          <div class="form-group">
+            <label class="form-label" for="contactName">Nombre Completo:</label>
+            <input 
+              id="contactName"
+              type="text" 
+              class="form-control" 
+              placeholder="Escribe tu nombre" 
+              [(ngModel)]="formData.name" 
+              name="name"
+              #nameInput="ngModel"
+              required
+              minlength="3"
+            >
+            @if (nameInput.invalid && (nameInput.dirty || nameInput.touched)) {
+              <div class="validation-error">
+                @if (nameInput.errors?.['required']) {
+                  El nombre es obligatorio.
+                }
+                @if (nameInput.errors?.['minlength']) {
+                  El nombre debe tener al menos 3 caracteres.
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Email Field -->
+          <div class="form-group">
+            <label class="form-label" for="contactEmail">Correo Electrónico:</label>
+            <input 
+              id="contactEmail"
+              type="email" 
+              class="form-control" 
+              placeholder="correo@ejemplo.com" 
+              [(ngModel)]="formData.email" 
+              name="email"
+              #emailInput="ngModel"
+              required
+              email
+            >
+            @if (emailInput.invalid && (emailInput.dirty || emailInput.touched)) {
+              <div class="validation-error">
+                @if (emailInput.errors?.['required']) {
+                  El correo es obligatorio.
+                }
+                @if (emailInput.errors?.['email']) {
+                  Por favor, ingresa un correo electrónico válido.
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Subject Dropdown -->
+          <div class="form-group">
+            <label class="form-label" for="contactSubject">Asunto:</label>
+            <select 
+              id="contactSubject"
+              class="form-control" 
+              [(ngModel)]="formData.subject" 
+              name="subject"
+            >
+              <option value="General">Consulta General</option>
+              <option value="Soporte">Soporte Técnico</option>
+              <option value="Colaboracion">Colaboraciones</option>
+              <option value="Feedback">Sugerencias y Comentarios</option>
+            </select>
+          </div>
+
+          <!-- Message Field -->
+          <div class="form-group">
+            <label class="form-label" for="contactMessage">Mensaje:</label>
+            <textarea 
+              id="contactMessage"
+              class="form-control" 
+              placeholder="Cuéntanos más detalladamente sobre tu consulta..." 
+              [(ngModel)]="formData.message" 
+              name="message"
+              #messageInput="ngModel"
+              required
+              minlength="10"
+            ></textarea>
+            @if (messageInput.invalid && (messageInput.dirty || messageInput.touched)) {
+              <div class="validation-error">
+                @if (messageInput.errors?.['required']) {
+                  El mensaje es obligatorio.
+                }
+                @if (messageInput.errors?.['minlength']) {
+                  El mensaje debe tener al menos 10 caracteres.
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-actions-row">
+            <button 
+              type="submit" 
+              class="btn btn-primary" 
+              [disabled]="contactForm.invalid"
+            >
+              <i class="fa-solid fa-gamepad"></i> Transmitir Mensaje
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Right Column: Info Panel -->
+    <aside class="contacto-info-sidebar">
+      <div class="card info-card">
+        <h2 class="sidebar-title"><i class="fa-solid fa-terminal"></i> COORDENADAS HUD</h2>
+        
+        <div class="info-items">
+          <div class="info-item-block">
+            <div class="info-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+            <div class="info-text">
+              <span class="info-label">E-MAIL DIRECTO</span>
+              <span class="info-value">support&#64;pixelverse.gg</span>
+            </div>
+          </div>
+
+          <div class="info-item-block">
+            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="info-text">
+              <span class="info-label">SEDE PRINCIPAL</span>
+              <span class="info-value">Neo-Veridia Sector 4, Digital Space</span>
+            </div>
+          </div>
+
+          <div class="info-item-block">
+            <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+            <div class="info-text">
+              <span class="info-label">RESPUESTA SLA</span>
+              <span class="info-value">Menos de 24 horas (7 días a la semana)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="discord-promo">
+          <h4>¿NECESITAS RESPUESTA INMEDIATA?</h4>
+          <p>Visita nuestro canal de soporte de Discord donde los moderadores y la comunidad te ayudarán al instante.</p>
+          <a href="https://discord.com" target="_blank" rel="noopener" class="discord-btn">
+            <i class="fa-brands fa-discord"></i> Chat de Soporte
+          </a>
+        </div>
+      </div>
+
+      <div class="card social-networks-card">
+        <h3>REDES DE TRANSMISIÓN</h3>
+        <div class="social-circles">
+          <a href="https://twitter.com" target="_blank" rel="noopener" class="social-circle twitter" aria-label="Twitter">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener" class="social-circle github" aria-label="Github">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" class="social-circle youtube" aria-label="Youtube">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+          <a href="https://twitch.tv" target="_blank" rel="noopener" class="social-circle twitch" aria-label="Twitch">
+            <i class="fa-brands fa-twitch"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

@@ -1,0 +1,163 @@
+<div class="juegos-container container">
+  <!-- Header Page -->
+  <header class="page-header">
+    <span class="badge float-animation">CATÁLOGO OFICIAL</span>
+    <h1>GALERÍA DE <span class="neon-text-purple">VIDEOJUEGOS</span></h1>
+    <p class="header-subtitle">Encuentra tus títulos preferidos, filtra por plataforma y conoce las especificaciones de cada juego.</p>
+  </header>
+
+  <!-- Search & Filters Bar -->
+  <section class="filters-bar card">
+    <div class="search-input-wrapper">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input 
+        type="text" 
+        class="form-control search-control" 
+        placeholder="Buscar por título o género..." 
+        [(ngModel)]="searchText"
+      >
+    </div>
+    
+    <div class="platform-filter-wrapper">
+      <label class="form-label select-label" for="platformSelect">Plataforma:</label>
+      <select 
+        id="platformSelect"
+        class="form-control filter-control" 
+        [(ngModel)]="selectedPlatform"
+      >
+        @for (platform of platforms; track platform) {
+          <option [value]="platform">{{ platform === 'All' ? 'Todas las Plataformas' : platform }}</option>
+        }
+      </select>
+    </div>
+  </section>
+
+  <!-- Grid of Games -->
+  <section class="catalog-grid-wrapper">
+    @if (filteredGames.length > 0) {
+      <div class="catalog-grid">
+        @for (game of filteredGames; track game.id) {
+          <div class="game-card card">
+            <div class="game-image-wrapper">
+              <img [src]="game.image" [alt]="game.title" class="game-image">
+              <div class="game-price-tag">${{ game.price }}</div>
+            </div>
+            
+            <div class="game-info">
+              <span class="game-genre">{{ game.genre }}</span>
+              <h3 class="game-title">{{ game.title }}</h3>
+              
+              <div class="game-rating">
+                <i class="fa-solid fa-star star-filled"></i>
+                <span>{{ game.rating }}</span>
+              </div>
+              
+              <div class="game-platforms">
+                @for (plat of game.platform; track plat) {
+                  <span class="platform-tag" [ngClass]="{
+                    'pc-tag': plat === 'PC',
+                    'ps-tag': plat === 'PS5',
+                    'xbox-tag': plat === 'Xbox Series X',
+                    'switch-tag': plat === 'Nintendo Switch'
+                  }">{{ plat }}</span>
+                }
+              </div>
+              
+              <div class="game-actions">
+                <button (click)="selectGame(game)" class="btn btn-secondary btn-full">
+                  <i class="fa-solid fa-circle-info"></i> Detalles
+                </button>
+                <button (click)="addToWishlist(game.title)" class="btn btn-pink btn-icon" aria-label="Añadir a deseos">
+                  <i class="fa-solid fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="no-results card">
+        <i class="fa-solid fa-circle-exclamation no-results-icon neon-text-pink"></i>
+        <h3>No se encontraron resultados</h3>
+        <p>Prueba buscando con palabras clave diferentes o modificando los filtros de plataforma.</p>
+        <button (click)="searchText = ''; selectedPlatform = 'All';" class="btn btn-primary">
+          Restablecer Filtros
+        </button>
+      </div>
+    }
+  </section>
+
+  <!-- Game Details Modal -->
+  @if (selectedGame) {
+    <div class="modal-overlay" (click)="closeModal()">
+      <div class="modal-content card" (click)="$event.stopPropagation()">
+        <button class="modal-close-btn" (click)="closeModal()" aria-label="Cerrar modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <div class="modal-body">
+          <div class="modal-image-col">
+            <img [src]="selectedGame.image" [alt]="selectedGame.title" class="modal-game-img">
+            <div class="modal-price">${{ selectedGame.price }}</div>
+          </div>
+          
+          <div class="modal-info-col">
+            <span class="modal-genre"><i class="fa-solid fa-tags"></i> {{ selectedGame.genre }}</span>
+            <h2 class="modal-title">{{ selectedGame.title }}</h2>
+            
+            <div class="modal-rating-row">
+              <div class="modal-rating">
+                <i class="fa-solid fa-star star-filled"></i>
+                <span>{{ selectedGame.rating }} / 5.0</span>
+              </div>
+              <span class="divider-dot">•</span>
+              <span class="modal-dev">Desarrollador: <strong>{{ selectedGame.developer }}</strong></span>
+            </div>
+
+            <p class="modal-description">{{ selectedGame.description }}</p>
+            
+            <div class="modal-meta-grid">
+              <div class="meta-item">
+                <span class="meta-label">Lanzamiento</span>
+                <span class="meta-value">{{ selectedGame.released }}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Distribuidora</span>
+                <span class="meta-value">PixelVerse Publishing</span>
+              </div>
+            </div>
+
+            <div class="modal-platforms-row">
+              <span class="meta-label">Disponible en:</span>
+              <div class="modal-platforms">
+                @for (plat of selectedGame.platform; track plat) {
+                  <span class="platform-tag" [ngClass]="{
+                    'pc-tag': plat === 'PC',
+                    'ps-tag': plat === 'PS5',
+                    'xbox-tag': plat === 'Xbox Series X',
+                    'switch-tag': plat === 'Nintendo Switch'
+                  }">{{ plat }}</span>
+                }
+              </div>
+            </div>
+            
+            <div class="modal-actions">
+              <button (click)="addToWishlist(selectedGame.title)" class="btn btn-primary">
+                <i class="fa-solid fa-heart"></i> Añadir a Deseos
+              </button>
+              <button (click)="closeModal()" class="btn btn-secondary">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Success Toast -->
+  <div class="toast" [ngClass]="{'show': showSuccessToast}">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span class="toast-text">{{ toastMessage }}</span>
+  </div>
+</div>

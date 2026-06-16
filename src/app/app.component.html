@@ -1,0 +1,116 @@
+<div class="app-layout">
+  <!-- Header Navbar -->
+  <header class="navbar-header">
+    <div class="navbar-container container">
+      <!-- Logo -->
+      <a routerLink="/inicio" class="navbar-logo" (click)="closeMobileMenu()">
+        <i class="fa-solid fa-gamepad logo-icon neon-text-cyan"></i>
+        <span>PIXEL<span class="neon-text-purple">VERSE</span></span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="navbar-links-desktop">
+        <a routerLink="/inicio" routerLinkActive="active" class="nav-link">
+          <i class="fa-solid fa-house"></i> Inicio
+        </a>
+        <a routerLink="/juegos" routerLinkActive="active" class="nav-link">
+          <i class="fa-solid fa-gamepad"></i> Juegos
+        </a>
+        <a routerLink="/noticias" routerLinkActive="active" class="nav-link">
+          <i class="fa-solid fa-newspaper"></i> Noticias
+        </a>
+        <a routerLink="/contacto" routerLinkActive="active" class="nav-link">
+          <i class="fa-solid fa-envelope"></i> Contacto
+        </a>
+      </nav>
+
+      <!-- CTA Action Button -->
+      <div class="navbar-actions-desktop">
+        <a routerLink="/contacto" class="btn btn-secondary btn-header">
+          <i class="fa-solid fa-user-plus"></i> Unirse
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" [attr.aria-expanded]="isMobileMenuOpen" aria-label="Toggle navigation menu">
+        <i class="fa-solid" [ngClass]="isMobileMenuOpen ? 'fa-xmark' : 'fa-bars'"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <nav class="navbar-links-mobile" [ngClass]="{'open': isMobileMenuOpen}">
+    <a routerLink="/inicio" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">
+      <i class="fa-solid fa-house"></i> Inicio
+    </a>
+    <a routerLink="/juegos" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">
+      <i class="fa-solid fa-gamepad"></i> Juegos
+    </a>
+    <a routerLink="/noticias" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">
+      <i class="fa-solid fa-newspaper"></i> Noticias
+    </a>
+    <a routerLink="/contacto" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">
+      <i class="fa-solid fa-envelope"></i> Contacto
+    </a>
+    <div class="mobile-menu-footer">
+      <a routerLink="/contacto" class="btn btn-primary btn-full-width" (click)="closeMobileMenu()">
+        <i class="fa-solid fa-circle-play"></i> Iniciar Sesión
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main View Render Area -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="app-footer">
+    <div class="footer-container container">
+      <!-- Info Column -->
+      <div class="footer-info">
+        <a routerLink="/inicio" class="footer-logo">
+          <i class="fa-solid fa-gamepad logo-icon neon-text-cyan"></i>
+          <span>PIXEL<span class="neon-text-purple">VERSE</span></span>
+        </a>
+        <p class="footer-desc">
+          El multiverso definitivo de videojuegos. Tu destino diario para reviews, catalogación interactiva de juegos y boletines sobre el mundo tecnológico.
+        </p>
+        <div class="footer-socials">
+          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <!-- Links Column -->
+      <div class="footer-nav">
+        <h4>NAVEGACIÓN</h4>
+        <nav class="footer-links">
+          <a routerLink="/inicio"><i class="fa-solid fa-chevron-right"></i> Inicio</a>
+          <a routerLink="/juegos"><i class="fa-solid fa-chevron-right"></i> Catálogo</a>
+          <a routerLink="/noticias"><i class="fa-solid fa-chevron-right"></i> Noticias</a>
+          <a routerLink="/contacto"><i class="fa-solid fa-chevron-right"></i> Contacto</a>
+        </nav>
+      </div>
+
+      <!-- Newsletter Column -->
+      <div class="footer-newsletter">
+        <h4>SOPORTE AL CLIENTE</h4>
+        <p>¿Problemas con el portal o quieres reportar un error? Ponte en contacto a través de nuestros canales oficiales.</p>
+        <a routerLink="/contacto" class="btn btn-secondary btn-small">
+          <i class="fa-solid fa-headset"></i> Centro de Soporte
+        </a>
+      </div>
+    </div>
+
+    <!-- Copyright Bar -->
+    <div class="footer-bar">
+      <div class="footer-bar-container container">
+        <p>&copy; 2026 PixelVerse Portal. Todos los derechos reservados. Desarrollado para S13 | AP7.</p>
+        <p class="footer-terms">Términos de Servicio | Privacidad</p>
+      </div>
+    </div>
+  </footer>
+</div>
