@@ -1,6 +1,6 @@
 <div class="app-layout">
-  <!-- Header Navbar -->
-  <header class="navbar-header">
+  <!-- Header Navbar (oculto en login) -->
+  <header class="navbar-header" *ngIf="!isLoginPage()">
     <div class="navbar-container container">
       <!-- Logo -->
       <a routerLink="/inicio" class="navbar-logo" (click)="closeMobileMenu()">
@@ -24,11 +24,15 @@
         </a>
       </nav>
 
-      <!-- CTA Action Button -->
+      <!-- CTA Action Button + Logout -->
       <div class="navbar-actions-desktop">
-        <a routerLink="/contacto" class="btn btn-secondary btn-header">
-          <i class="fa-solid fa-user-plus"></i> Unirse
-        </a>
+        <span class="user-email-display" *ngIf="authService.isAuthenticated()">
+          <i class="fa-solid fa-user-circle"></i>
+          {{ authService.getUserEmail() }}
+        </span>
+        <button class="btn btn-logout btn-header" (click)="logout()" id="logoutBtnDesktop">
+          <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+        </button>
       </div>
 
       <!-- Mobile Hamburger Button -->
@@ -38,8 +42,8 @@
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu -->
-  <nav class="navbar-links-mobile" [ngClass]="{'open': isMobileMenuOpen}">
+  <!-- Mobile Drawer Menu (oculto en login) -->
+  <nav class="navbar-links-mobile" [ngClass]="{'open': isMobileMenuOpen}" *ngIf="!isLoginPage()">
     <a routerLink="/inicio" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">
       <i class="fa-solid fa-house"></i> Inicio
     </a>
@@ -53,9 +57,9 @@
       <i class="fa-solid fa-envelope"></i> Contacto
     </a>
     <div class="mobile-menu-footer">
-      <a routerLink="/contacto" class="btn btn-primary btn-full-width" (click)="closeMobileMenu()">
-        <i class="fa-solid fa-circle-play"></i> Iniciar Sesión
-      </a>
+      <button class="btn btn-primary btn-full-width" (click)="logout()" id="logoutBtnMobile">
+        <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+      </button>
     </div>
   </nav>
 
@@ -64,8 +68,8 @@
     <router-outlet></router-outlet>
   </main>
 
-  <!-- Global Footer -->
-  <footer class="app-footer">
+  <!-- Global Footer (oculto en login) -->
+  <footer class="app-footer" *ngIf="!isLoginPage()">
     <div class="footer-container container">
       <!-- Info Column -->
       <div class="footer-info">
@@ -108,7 +112,7 @@
     <!-- Copyright Bar -->
     <div class="footer-bar">
       <div class="footer-bar-container container">
-        <p>&copy; 2026 PixelVerse Portal. Todos los derechos reservados. Desarrollado para S13 | AP7.</p>
+        <p>&copy; 2026 PixelVerse Portal. Todos los derechos reservados. Desarrollado para S14 | AP8.</p>
         <p class="footer-terms">Términos de Servicio | Privacidad</p>
       </div>
     </div>

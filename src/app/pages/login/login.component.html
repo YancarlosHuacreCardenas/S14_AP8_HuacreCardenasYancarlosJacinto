@@ -1,0 +1,147 @@
+<div class="login-page">
+  <!-- Animated background particles -->
+  <div class="login-bg-effects">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="login-wrapper">
+    <!-- Left side: Branding -->
+    <div class="login-branding">
+      <div class="branding-content">
+        <div class="brand-icon">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+        <h1 class="brand-title">PIXEL<span class="neon-text-purple">VERSE</span></h1>
+        <p class="brand-tagline">El multiverso definitivo de videojuegos</p>
+        <div class="brand-features">
+          <div class="feature-item">
+            <i class="fa-solid fa-shield-halved neon-text-cyan"></i>
+            <span>Acceso seguro</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-bolt neon-text-purple"></i>
+            <span>Contenido exclusivo</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-users neon-text-pink"></i>
+            <span>Comunidad gamer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: Login Form -->
+    <div class="login-form-section">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="login-icon-circle">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <h2>Iniciar Sesión</h2>
+          <p>Ingresa tus credenciales para acceder al portal</p>
+        </div>
+
+        <!-- Error message -->
+        <div class="login-error-banner" *ngIf="loginError">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>{{ loginErrorMessage }}</span>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" id="loginForm">
+          <!-- Email field -->
+          <div class="form-group">
+            <label for="email" class="form-label">
+              <i class="fa-solid fa-envelope"></i> Correo Electrónico
+            </label>
+            <div class="input-wrapper" [class.input-error]="email?.invalid && email?.touched" [class.input-success]="email?.valid && email?.touched">
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="ejemplo@correo.com"
+                autocomplete="email"
+              />
+              <i class="input-status-icon fa-solid" 
+                 [ngClass]="{'fa-check': email?.valid && email?.touched, 'fa-times': email?.invalid && email?.touched}"
+                 *ngIf="email?.touched">
+              </i>
+            </div>
+            <!-- Email validation messages -->
+            <div class="validation-messages" *ngIf="email?.invalid && email?.touched">
+              <span class="error-msg" *ngIf="email?.errors?.['required']">
+                <i class="fa-solid fa-triangle-exclamation"></i> El correo electrónico es obligatorio.
+              </span>
+              <span class="error-msg" *ngIf="email?.errors?.['email']">
+                <i class="fa-solid fa-triangle-exclamation"></i> El formato del correo electrónico es inválido.
+              </span>
+            </div>
+          </div>
+
+          <!-- Password field -->
+          <div class="form-group">
+            <label for="password" class="form-label">
+              <i class="fa-solid fa-key"></i> Contraseña
+            </label>
+            <div class="input-wrapper password-wrapper" [class.input-error]="password?.invalid && password?.touched" [class.input-success]="password?.valid && password?.touched">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                class="form-control"
+                formControlName="password"
+                placeholder="Mínimo 6 caracteres"
+                autocomplete="current-password"
+              />
+              <button type="button" class="password-toggle-btn" (click)="togglePasswordVisibility()" aria-label="Mostrar/ocultar contraseña">
+                <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+            <!-- Password validation messages -->
+            <div class="validation-messages" *ngIf="password?.invalid && password?.touched">
+              <span class="error-msg" *ngIf="password?.errors?.['required']">
+                <i class="fa-solid fa-triangle-exclamation"></i> La contraseña es obligatoria.
+              </span>
+              <span class="error-msg" *ngIf="password?.errors?.['minlength']">
+                <i class="fa-solid fa-triangle-exclamation"></i> La contraseña debe tener al menos 6 caracteres.
+              </span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary btn-login"
+            id="loginSubmitBtn"
+            [disabled]="isLoading"
+          >
+            <span *ngIf="!isLoading">
+              <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+            </span>
+            <span *ngIf="isLoading" class="loading-spinner">
+              <i class="fa-solid fa-spinner fa-spin"></i> Verificando...
+            </span>
+          </button>
+        </form>
+
+        <!-- Hint -->
+        <div class="login-hint">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Demo: <strong>admin&#64;miapp.com</strong> / <strong>123456</strong></span>
+        </div>
+
+        <!-- Link to Register -->
+        <div class="login-register-link">
+          <span>¿No tienes cuenta?</span>
+          <a routerLink="/register" class="link-register">
+            <i class="fa-solid fa-user-plus"></i> Crear Cuenta
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

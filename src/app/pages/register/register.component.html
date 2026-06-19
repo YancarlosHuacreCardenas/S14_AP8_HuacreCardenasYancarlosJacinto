@@ -1,0 +1,204 @@
+<div class="register-page">
+  <!-- Animated background particles -->
+  <div class="register-bg-effects">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="register-wrapper">
+    <!-- Left side: Branding -->
+    <div class="register-branding">
+      <div class="branding-content">
+        <div class="brand-icon">
+          <i class="fa-solid fa-gamepad"></i>
+        </div>
+        <h1 class="brand-title">PIXEL<span class="neon-text-purple">VERSE</span></h1>
+        <p class="brand-tagline">Únete al multiverso de videojuegos</p>
+        <div class="brand-features">
+          <div class="feature-item">
+            <i class="fa-solid fa-user-plus neon-text-cyan"></i>
+            <span>Registro gratuito</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-star neon-text-purple"></i>
+            <span>Contenido premium</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-trophy neon-text-pink"></i>
+            <span>Logros exclusivos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: Register Form -->
+    <div class="register-form-section">
+      <div class="register-card">
+        <div class="register-header">
+          <div class="register-icon-circle">
+            <i class="fa-solid fa-user-plus"></i>
+          </div>
+          <h2>Crear Cuenta</h2>
+          <p>Completa tus datos para registrarte</p>
+        </div>
+
+        <!-- Error message -->
+        <div class="register-error-banner" *ngIf="registerError">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>{{ registerErrorMessage }}</span>
+        </div>
+
+        <!-- Success message -->
+        <div class="register-success-banner" *ngIf="registerSuccess">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>{{ registerSuccessMessage }}</span>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form" id="registerForm">
+          <!-- Nombre field -->
+          <div class="form-group">
+            <label for="nombre" class="form-label">
+              <i class="fa-solid fa-user"></i> Nombre Completo
+            </label>
+            <div class="input-wrapper" [class.input-error]="nombre?.invalid && nombre?.touched" [class.input-success]="nombre?.valid && nombre?.touched">
+              <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                formControlName="nombre"
+                placeholder="Ingresa tu nombre"
+                autocomplete="name"
+              />
+              <i class="input-status-icon fa-solid"
+                 [ngClass]="{'fa-check': nombre?.valid && nombre?.touched, 'fa-times': nombre?.invalid && nombre?.touched}"
+                 *ngIf="nombre?.touched">
+              </i>
+            </div>
+            <div class="validation-messages" *ngIf="nombre?.invalid && nombre?.touched">
+              <span class="error-msg" *ngIf="nombre?.errors?.['required']">
+                <i class="fa-solid fa-triangle-exclamation"></i> El nombre es obligatorio.
+              </span>
+              <span class="error-msg" *ngIf="nombre?.errors?.['minlength']">
+                <i class="fa-solid fa-triangle-exclamation"></i> El nombre debe tener al menos 3 caracteres.
+              </span>
+            </div>
+          </div>
+
+          <!-- Email field -->
+          <div class="form-group">
+            <label for="email" class="form-label">
+              <i class="fa-solid fa-envelope"></i> Correo Electrónico
+            </label>
+            <div class="input-wrapper" [class.input-error]="email?.invalid && email?.touched" [class.input-success]="email?.valid && email?.touched">
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="ejemplo@correo.com"
+                autocomplete="email"
+              />
+              <i class="input-status-icon fa-solid"
+                 [ngClass]="{'fa-check': email?.valid && email?.touched, 'fa-times': email?.invalid && email?.touched}"
+                 *ngIf="email?.touched">
+              </i>
+            </div>
+            <div class="validation-messages" *ngIf="email?.invalid && email?.touched">
+              <span class="error-msg" *ngIf="email?.errors?.['required']">
+                <i class="fa-solid fa-triangle-exclamation"></i> El correo electrónico es obligatorio.
+              </span>
+              <span class="error-msg" *ngIf="email?.errors?.['email']">
+                <i class="fa-solid fa-triangle-exclamation"></i> El formato del correo es inválido.
+              </span>
+            </div>
+          </div>
+
+          <!-- Password field -->
+          <div class="form-group">
+            <label for="password" class="form-label">
+              <i class="fa-solid fa-key"></i> Contraseña
+            </label>
+            <div class="input-wrapper password-wrapper" [class.input-error]="password?.invalid && password?.touched" [class.input-success]="password?.valid && password?.touched">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                class="form-control"
+                formControlName="password"
+                placeholder="Mínimo 6 caracteres"
+                autocomplete="new-password"
+              />
+              <button type="button" class="password-toggle-btn" (click)="togglePasswordVisibility()" aria-label="Mostrar/ocultar contraseña">
+                <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+            <div class="validation-messages" *ngIf="password?.invalid && password?.touched">
+              <span class="error-msg" *ngIf="password?.errors?.['required']">
+                <i class="fa-solid fa-triangle-exclamation"></i> La contraseña es obligatoria.
+              </span>
+              <span class="error-msg" *ngIf="password?.errors?.['minlength']">
+                <i class="fa-solid fa-triangle-exclamation"></i> La contraseña debe tener al menos 6 caracteres.
+              </span>
+            </div>
+          </div>
+
+          <!-- Confirm Password field -->
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">
+              <i class="fa-solid fa-lock"></i> Confirmar Contraseña
+            </label>
+            <div class="input-wrapper password-wrapper"
+                 [class.input-error]="confirmPassword?.touched && !passwordsMatch()"
+                 [class.input-success]="confirmPassword?.touched && confirmPassword?.valid && passwordsMatch()">
+              <input
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                id="confirmPassword"
+                class="form-control"
+                formControlName="confirmPassword"
+                placeholder="Repite tu contraseña"
+                autocomplete="new-password"
+              />
+              <button type="button" class="password-toggle-btn" (click)="toggleConfirmPasswordVisibility()" aria-label="Mostrar/ocultar contraseña">
+                <i class="fa-solid" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+            <div class="validation-messages" *ngIf="confirmPassword?.touched">
+              <span class="error-msg" *ngIf="confirmPassword?.errors?.['required']">
+                <i class="fa-solid fa-triangle-exclamation"></i> Debes confirmar tu contraseña.
+              </span>
+              <span class="error-msg" *ngIf="!confirmPassword?.errors?.['required'] && !passwordsMatch()">
+                <i class="fa-solid fa-triangle-exclamation"></i> Las contraseñas no coinciden.
+              </span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary btn-register"
+            id="registerSubmitBtn"
+            [disabled]="isLoading"
+          >
+            <span *ngIf="!isLoading">
+              <i class="fa-solid fa-user-plus"></i> Registrarse
+            </span>
+            <span *ngIf="isLoading" class="loading-spinner">
+              <i class="fa-solid fa-spinner fa-spin"></i> Registrando...
+            </span>
+          </button>
+        </form>
+
+        <!-- Link to Login -->
+        <div class="register-link">
+          <span>¿Ya tienes cuenta?</span>
+          <a routerLink="/login" class="link-login">
+            <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

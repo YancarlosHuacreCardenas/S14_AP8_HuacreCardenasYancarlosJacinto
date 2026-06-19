@@ -77,6 +77,47 @@
 .navbar-actions-desktop {
   display: flex;
   align-items: center;
+  gap: 16px;
+}
+
+.user-email-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 6px 14px;
+  background: var(--bg-tertiary);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 245, 212, 0.15);
+}
+
+.user-email-display i {
+  color: var(--accent-cyan);
+  font-size: 0.95rem;
+}
+
+.btn-logout {
+  background: transparent;
+  color: var(--accent-pink);
+  border: 2px solid var(--accent-pink);
+  cursor: pointer;
+  font-family: var(--font-gaming);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--border-radius);
+  transition: var(--transition-smooth);
+}
+
+.btn-logout:hover {
+  background: rgba(255, 0, 127, 0.1);
+  box-shadow: var(--glow-pink);
+  transform: translateY(-2px);
 }
 
 .btn-header {
