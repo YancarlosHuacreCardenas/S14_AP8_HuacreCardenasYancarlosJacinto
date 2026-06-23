@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: app-videojuegos
+    runtime: static
+    buildCommand: npm run build
+    publishPath: dist/app-videojuegos/browser
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
